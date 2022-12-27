@@ -1,0 +1,51 @@
+@host = https://gcrl8ntbaa.execute-api.us-east-1.amazonaws.com
+@stage = demo
+@app = notes
+@token = eyJraWQiOiJMRFIzVkVlN011bzRreFpQVGdxeVpueW83VGFzeUduNndRNThacktCTE9RPSIsImFsZyI6IlJTMjU2In0.eyJhdF9oYXNoIjoibWhTdm01N0N3cFcyVVJKMVB5NjFzUSIsInN1YiI6Ijk5OTBlYjAzLTg5ODgtNDc1Mi04MGJjLWQ3Y2Y3NDJlNDAxNyIsImF1ZCI6IjM4NWkzZGhnNmZqNmNtcGt2MzZmNmlxbnIyIiwiZXZlbnRfaWQiOiI1NDAyZTVhYy02YjU2LTRlYjEtYTIwOS1iYTY3ZGI3ODhkYzMiLCJ0b2tlbl91c2UiOiJpZCIsImF1dGhfdGltZSI6MTY3MjE1NDQyNSwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLnVzLWVhc3QtMS5hbWF6b25hd3MuY29tXC91cy1lYXN0LTFfazJ2dzhqdlphIiwiY29nbml0bzp1c2VybmFtZSI6IndvbmduaSIsImV4cCI6MTY3MjE1ODAyNSwiaWF0IjoxNjcyMTU0NDI1LCJqdGkiOiI1MjhkOTMwMy05ZTE4LTQ4MmMtODhkZC02NzZjNjRlYWFiMzcifQ.W33r_ARmmlsMOwd4KSkrWpAMlId9zUSI-06bYIjicsdXj8x1OAlCDTJgkJCTMvBcU4-iqDs9bj-N4y03XlFk2OrxjsGvrErxreshNZZyN-wMIyUTIHEjwaVdAXNygBHX_F1bsFlw4KZfS-snLVrmfXTYOZva9Z8x9s1YElTnPZovykcObUjEZ1PNjcA3B-bGPWIr2XdkiiGCv5_GE_K18BRIhwKqhGqjB4l63uS6R9c5x73amQzrFDO04Zuhq8qabOIOrHrbP8-nmI5bzNWijv4u2r0oJwJ3StPB5oFWpruxJWsaNM1ScPfYQu1U4XOD6zbopGU9Crs3mUhxGoEOEw
+
+###
+
+POST {{host}}/{{stage}}/{{app}} HTTP/1.1
+content-type: application/json
+Authorization: {{token}}
+
+{
+  "id": "101",
+  "title": "My first note",
+  "body": "Hello world"
+}
+
+###
+
+PUT {{host}}/{{stage}}/{{app}}/100 HTTP/1.1
+content-type: application/json
+Authorization: {{token}}
+
+{
+  "title": "My first note (updated)",
+  "body": "Hello new world!!!"
+}
+
+###
+
+DELETE {{host}}/{{stage}}/{{app}}/100 HTTP/1.1
+Authorization: {{token}}
+
+###
+
+GET {{host}}/{{stage}}/{{app}} HTTP/1.1
+Authorization: {{token}}
+
+###
+https://wongni-notes-cd-demo.auth.us-east-1.amazoncognito.com/login?response_type=token&client_id=385i3dhg6fj6cmpkv36f6iqnr2&redirect_uri=http://localhost:3000
+
+
+http://localhost:3000/#
+
+id_token=eyJraWQiOiJMRFIzVkVlN011bzRreFpQVGdxeVpueW83VGFzeUduNndRNThacktCTE9RPSIsImFsZyI6IlJTMjU2In0.eyJhdF9oYXNoIjoibWhTdm01N0N3cFcyVVJKMVB5NjFzUSIsInN1YiI6Ijk5OTBlYjAzLTg5ODgtNDc1Mi04MGJjLWQ3Y2Y3NDJlNDAxNyIsImF1ZCI6IjM4NWkzZGhnNmZqNmNtcGt2MzZmNmlxbnIyIiwiZXZlbnRfaWQiOiI1NDAyZTVhYy02YjU2LTRlYjEtYTIwOS1iYTY3ZGI3ODhkYzMiLCJ0b2tlbl91c2UiOiJpZCIsImF1dGhfdGltZSI6MTY3MjE1NDQyNSwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLnVzLWVhc3QtMS5hbWF6b25hd3MuY29tXC91cy1lYXN0LTFfazJ2dzhqdlphIiwiY29nbml0bzp1c2VybmFtZSI6IndvbmduaSIsImV4cCI6MTY3MjE1ODAyNSwiaWF0IjoxNjcyMTU0NDI1LCJqdGkiOiI1MjhkOTMwMy05ZTE4LTQ4MmMtODhkZC02NzZjNjRlYWFiMzcifQ.W33r_ARmmlsMOwd4KSkrWpAMlId9zUSI-06bYIjicsdXj8x1OAlCDTJgkJCTMvBcU4-iqDs9bj-N4y03XlFk2OrxjsGvrErxreshNZZyN-wMIyUTIHEjwaVdAXNygBHX_F1bsFlw4KZfS-snLVrmfXTYOZva9Z8x9s1YElTnPZovykcObUjEZ1PNjcA3B-bGPWIr2XdkiiGCv5_GE_K18BRIhwKqhGqjB4l63uS6R9c5x73amQzrFDO04Zuhq8qabOIOrHrbP8-nmI5bzNWijv4u2r0oJwJ3StPB5oFWpruxJWsaNM1ScPfYQu1U4XOD6zbopGU9Crs3mUhxGoEOEw
+
+access_token=eyJraWQiOiIxbEtMQ1h2ZTRscHk0RmVjYmMycE9yYnZNeEZjUnFFOHdtN1RlMVFkaHVZPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI5OTkwZWIwMy04OTg4LTQ3NTItODBiYy1kN2NmNzQyZTQwMTciLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9rMnZ3OGp2WmEiLCJ2ZXJzaW9uIjoyLCJjbGllbnRfaWQiOiIzODVpM2RoZzZmajZjbXBrdjM2ZjZpcW5yMiIsImV2ZW50X2lkIjoiNTQwMmU1YWMtNmI1Ni00ZWIxLWEyMDktYmE2N2RiNzg4ZGMzIiwidG9rZW5fdXNlIjoiYWNjZXNzIiwic2NvcGUiOiJwaG9uZSBvcGVuaWQgcHJvZmlsZSBlbWFpbCIsImF1dGhfdGltZSI6MTY3MjE1NDQyNSwiZXhwIjoxNjcyMTU4MDI1LCJpYXQiOjE2NzIxNTQ0MjUsImp0aSI6ImQxNmUxOWExLWEwMjctNDNmOS1iNjVhLWUwNDIzMWNmMzhjYiIsInVzZXJuYW1lIjoid29uZ25pIn0.F1g8CvUihDMuJfh2dv7C9iz-HQpvC5EbllYpPQOJvgwyLXV8EU7z0-Jzt7NyBxFRHSHgkIVY2OofgSBriVi-SAiR4pSZ6GWYmbnJw5SoId52xXpKgF1piJzoQbwsID8CwAQ5rs9UIxmbbTrSdInRzWxnY-4mUuc2yvSJjktIhUwxS0slRiWGW0leq-kexXBVHdfcWd4Ah1VCqhuabtLo12jYT7cPt9iUV-Eiiu4ulmU-_MdF-C6_MNgAKMjxCIgA2dn7wdenHoQ3DkBd0mWNVlQevOMfQXeddYKnZSx3kuwqrVMPFqRsvpNS5HOUdTuZpCyIesNC9vgbd1L9XJ85Iw
+
+expires_in=3600
+
+token_type=Bearer

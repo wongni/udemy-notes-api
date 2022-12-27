@@ -1,0 +1,83 @@
+service: notes-api
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: ${opt:stage, 'dev'}
+  region: us-east-1
+  environment:
+    NOTES_TABLE_NAME: !Ref notesTable
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+
+plugins:
+  - serverless-iam-roles-per-function
+
+functions:
+  authorizer:
+    handler: authorizer.handler
+    environment:
+      COGNITO_USER_POOL_ID: !Ref cognitoUserPool
+      COGNITO_WEB_CLIENT_ID: !Ref cognitoUserPoolClient
+  createNote:
+    handler: handler.createNote
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:PutItem
+        Resource: !GetAtt notesTable.Arn
+    events:
+      - http:
+          method: post
+          path: notes
+          authorizer:
+            name: userpool_authorizer
+            type: COGNITO_USER_POOLS
+            arn: !GetAtt cognitoUserPool.Arn
+  updateNote:
+    handler: handler.updateNote
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:UpdateItem
+        Resource: !GetAtt notesTable.Arn
+    events:
+      - http:
+          method: put
+          path: notes/{id}
+          authorizer:
+            name: userpool_authorizer
+            type: COGNITO_USER_POOLS
+            arn: !GetAtt cognitoUserPool.Arn
+  deleteNote:
+    handler: handler.deleteNote
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:DeleteItem
+        Resource: !GetAtt notesTable.Arn
+    events:
+      - http:
+          method: delete
+          path: notes/{id}
+          authorizer:
+            name: userpool_authorizer
+            type: COGNITO_USER_POOLS
+            arn: !GetAtt cognitoUserPool.Arn
+  getAllNotes:
+    handler: handler.getAllNotes
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:Scan
+        Resource: !GetAtt notesTable.Arn
+    events:
+      - http:
+          method: get
+          path: notes
+          authorizer:
+            name: userpool_authorizer
+            type: COGNITO_USER_POOLS
+            arn: !GetAtt cognitoUserPool.Arn
+resources:
+  Resources: ${file(resources.yml)}
