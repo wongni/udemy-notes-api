@@ -1,0 +1,26 @@
+version: 0.2
+
+phases:
+  install:
+    on-failure: ABORT
+    runtime-versions:
+      nodejs: 12
+    commands:
+      - echo Installing serverless CLI
+      - npm i -g serverless@3
+      - echo Install npm dependencies
+      - npm install
+  build:
+    on-failure: ABORT
+    commands:
+      - echo Running tests
+      - npm test
+      - echo Packaging the service
+      - serverless package --package my-artifacts --stage dev
+artifacts:
+  files:
+    - my-artifacts/*
+  name: MyProjectArtifacts
+cache:
+  paths:
+    - node_modules/**/*
